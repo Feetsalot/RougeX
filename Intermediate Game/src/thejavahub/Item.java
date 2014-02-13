@@ -19,14 +19,13 @@ public class Item{
 	
 	//Item properties
 	int itemID;
-	int damage;
 	int range;
 	double durability;
 	
 	int equipArea;
 	
 	
-	public Item(int itemID, int damage, int range, double durability, boolean consumable, boolean se){
+	public Item(int itemID, Enum<material> material, int range, boolean consumable, boolean se){
 		
 		
 		if (itemID == 1) { // Checking the ItemID

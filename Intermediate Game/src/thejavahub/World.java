@@ -14,7 +14,7 @@ public class World {
     private Image[][] blockImg;
     public boolean[][] isSolid;
     //Block images
-    private Image BG, BD, DB, BS, BW, BWC, SB;
+    private Image BG, BD, DB, BS, BW, BWC, SB, DOOR;
     public Image BASIC_SWORD, INVENTORY;
     
     private int x, y, xDirection, yDirection;
@@ -39,6 +39,7 @@ public class World {
         BWC = new ImageIcon("C:/Users/Owner/Desktop/eclipse/Intermediate Game/src/thejavahub/images/water_corner.png").getImage().getScaledInstance(tileSize, tileSize, 0);
         SB = new ImageIcon("C:/Users/Owner/Desktop/eclipse/Intermediate Game/src/thejavahub/images/stonebrick_s.png").getImage().getScaledInstance(tileSize, tileSize, 0);
         DB = new ImageIcon("C:/Users/Owner/Desktop/eclipse/Intermediate Game/src/thejavahub/images/floortile.png").getImage().getScaledInstance(tileSize, tileSize, 0);
+        DOOR = new ImageIcon("C:/Users/Owner/Desktop/eclipse/Intermediate Game/src/thejavahub/images/door.png").getImage().getScaledInstance(tileSize, tileSize, 0);
         INVENTORY = new ImageIcon("C:/Users/Owner/Desktop/eclipse/Intermediate Game/src/thejavahub/images/InventoryBox.gif").getImage();
         
         //Make an array that can contain 500 (invisible) rectangles, for collision detection, which is the area of the screen 25 width by 20 height
@@ -82,7 +83,7 @@ public class World {
     	Image[][] testRoomImgs =  {{SB, SB, SB, DB, DB, SB, SB},
     								{SB, DB, DB, DB, DB, DB, DB},
     								{SB, DB, DB, DB, DB, DB, DB},
-    								{DB, DB, DB, BW, BW, DB, DB},
+    								{DOOR, DB, DB, BW, BW, DB, DB},
     								{SB, DB, DB, BW, BW, DB, DB},
     								{SB, DB, DB, DB, DB, DB, DB},
     								{SB, DB, DB, DB, DB, DB, DB}};

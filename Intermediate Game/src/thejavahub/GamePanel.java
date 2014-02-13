@@ -112,8 +112,9 @@ public class GamePanel extends JPanel implements Runnable {
                 	p1.moveEquip(1);
                 }
                 else if (e.getKeyCode() == e.VK_X && gameState){
-                	p1.attack(p1.rarm);
                 	p1.aState = !p1.aState;
+                	p1.attack(p1.rarm);
+
                 }
                 else if (e.getKeyCode() == e.VK_I){
                 	inState = !inState; // Toggles the inventory
