@@ -10,14 +10,14 @@ import javax.swing.ImageIcon;
 public class World {
 	
     public Player player;
+    public Mob mob;
+    public mobCube cmob;
     public Rectangle[][] blocks;
     private Image[][] blockImg;
     public boolean[][] isSolid;
     //Block images
     private Image BG, BD, DB, BS, BW, BWC, SB, DOOR;
     public Image BASIC_SWORD, INVENTORY;
-    
-    private int x, y, xDirection, yDirection;
     
     private int xTiles, yTiles, tileSize;
     
@@ -47,13 +47,15 @@ public class World {
         //Make an array that can contain 500 images(the pictures of tiles) which is the area of the screen 25 width by 20 height
         blockImg = new Image[xTiles][yTiles];
         isSolid = new boolean[xTiles][yTiles];
-        player = new Player(isSolid, items);
+        player = new Player(items);
+        cmob = new mobCube();
         player.inventory = new Item[7][7];
         player.inventory[0][0] = new Sword();
         loadArrays();
         
-
-    	
+        Entity.isSolid = isSolid;
+    	player.setEntityBlockXY();
+    	cmob.setEntityBlockXY();
     }
 
     
@@ -156,7 +158,7 @@ boolean[][] smallRoomSolid= {{true, true, true},
           	  int smallrefTileY = y * smallroomSizeY;
         	  
         	  double randval = Math.random();
-if(randval < 0.2){
+if(randval < 0.05){
       	  
       	  for (int tileX = 0; tileX < smallroomSizeX; tileX++) {
       		  for (int tileY = 0; tileY < smallroomSizeY; tileY++) {
@@ -175,7 +177,6 @@ if(randval < 0.2){
         	}
         	}
         }
-        player.pickPosition();
 
         itemDrop(5);
         
@@ -212,6 +213,10 @@ if(randval < 0.2){
 			items.add(item);
 		}
 	}
+	
+	public void moveEnemies() {
+		cmob.think(player);
+	}
     
 
 	public void draw(Graphics g, boolean inState){
@@ -223,8 +228,8 @@ if(randval < 0.2){
              }
     	 }
 
-    	 g.drawImage(player.playerImg, player.playerRect.x, player.playerRect.y, null);
-    	 
+    	g.drawImage(player.image, player.blockX * tileSize, player.blockY * tileSize, null);
+    	g.drawImage(cmob.image, cmob.blockX * tileSize, cmob.blockY * tileSize, null);
 
     	 
     	 for (Item item: items) {
@@ -233,28 +238,13 @@ if(randval < 0.2){
 
     	 if(player.melee && player.aState){
         	 g.setColor(new Color(1.0f, 0.0f, 0.0f, 0.5f));
-        	 g.fillRect( (player.playerRect.x + 32), (player.playerRect.y + 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x + 32), (player.playerRect.y), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y + 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x + 32), (player.playerRect.y - 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x - 32), (player.playerRect.y + 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x - 32), (player.playerRect.y - 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y - 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x - 32), (player.playerRect.y), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y), 32, 32);
+        	 g.fillRect((player.blockX - 1) * tileSize, (player.blockY - 1) * tileSize, 3 * tileSize, 3 * tileSize);
     	 }
     	 
     	 if(player.lrange && player.aState){
         	 g.setColor(new Color(1.0f, 0.0f, 0.0f, 0.5f));
-        	 g.fillRect( (player.playerRect.x + 32), (player.playerRect.y), 32, 32);
-        	 g.fillRect( (player.playerRect.x + 64), (player.playerRect.y), 32, 32);
-        	 g.fillRect( (player.playerRect.x - 32), (player.playerRect.y), 32, 32);
-        	 g.fillRect( (player.playerRect.x - 64), (player.playerRect.y), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y + 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y + 64), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y - 32), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y - 64), 32, 32);
-        	 g.fillRect( (player.playerRect.x), (player.playerRect.y), 32, 32);
+        	 g.fillRect(player.blockX * tileSize, (player.blockY - 2) * tileSize, 1 * tileSize, 5 * tileSize);
+        	 g.fillRect((player.blockX - 2) * tileSize, player.blockY * tileSize, 5 * tileSize, 1 * tileSize);
     	 }
     	 
     	 if(inState == true){

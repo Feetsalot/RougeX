@@ -8,13 +8,8 @@ import javax.swing.ImageIcon;
 
 public class Player extends Entity{
 	
-	public Rectangle playerRect;
-	public Image playerImg;
-	private int blockX, blockY;
-	
 	public int invX, invY, equipY;
-	
-	private boolean[][] isSolid;
+
 	public Item[][] inventory;
 	
 	public Item head, torso, larm, rarm, item;
@@ -29,31 +24,14 @@ public class Player extends Entity{
 	
 	private List<Item> items;
 	
-	public Player(boolean[][]isSolid, List<Item> items){
-		super(10*plevel, 1+plevel, 2+plevel); //TODO: Change so that items effect player's stats
-		playerImg = new ImageIcon("C:/Users/Owner/Desktop/eclipse/Intermediate Game/src/thejavahub/images/player.png").getImage().getScaledInstance(32, 32, 0);
-        this.isSolid = isSolid;
+	public Player(List<Item> items){
+		super(10*plevel, 1+plevel, 2+plevel, "C:/Users/Owner/Desktop/eclipse/Intermediate Game/src/thejavahub/images/player.png"); 
         this.items = items;
 		invX = 0;
 		invY = 0;
 		equipY = 0;
 		rarm = new Sword();
-	}
-	public void pickPosition(){
-
-
-
-		Random rand = new Random();
-		int x = rand.nextInt(22)+1;
-		int y = rand.nextInt(18)+1;
 		
-		while(isSolid[x][y] == true) {
-			x = rand.nextInt(22)+1;
-			y = rand.nextInt(18)+1;
-		}
-		playerRect = new Rectangle(x*32, y*32, 16, 16);
-		blockX = x;
-		blockY = y;
 	}
 	
 	public void moveEquip(int dir) {
@@ -188,28 +166,24 @@ public class Player extends Entity{
 		case 0:
 			if (isSolid[blockX+1][blockY] == false)
 			{
-			playerRect.x += 32; //Right
 			blockX += 1;
 			}
 		break;
 		case 1:
 			if (isSolid[blockX-1][blockY] == false)
 			{
-			playerRect.x -= 32; //Left
 			blockX -= 1;
 			}
 		break;
 		case 2: 
 			if (isSolid[blockX][blockY+1] == false)
 			{
-			playerRect.y += 32; //Down
 			blockY += 1;
 			}
 		break;
 		case 3: 
 			if (isSolid[blockX][blockY-1] == false)
 			{
-			playerRect.y -= 32; //Up
 			blockY -= 1;
 			}
 			

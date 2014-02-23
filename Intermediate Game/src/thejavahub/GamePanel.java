@@ -62,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
                 	}
                 	else{
                 		p1.move(3);
+                		world.moveEnemies();
                 		
                 	}
                 }
@@ -73,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
                 	}
                 	else{
                 		p1.move(2);
+                		world.moveEnemies();
                 		
                 	}
                 }
@@ -83,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
                 	}
                 	else{
                 		p1.move(1);
+                		world.moveEnemies();
                 	
                 	}
                 }
@@ -93,6 +96,7 @@ public class GamePanel extends JPanel implements Runnable {
                 	}
                 	else{
                 		p1.move(0);
+                		world.moveEnemies();
                 		
                 	}
                 }
@@ -122,6 +126,9 @@ public class GamePanel extends JPanel implements Runnable {
                 
                 else if (e.getKeyCode() == e.VK_P){
                 	gameState = !gameState; // Toggles the pause Screen
+                }
+                else if (e.getKeyCode() == e.VK_ESCAPE){
+                	System.exit(0);
                 }
             }
             

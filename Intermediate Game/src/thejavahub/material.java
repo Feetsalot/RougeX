@@ -1,21 +1,30 @@
 package thejavahub;
 
 
-	public enum material {
-		WOOD (1, 1, 1),
-		STONE (2, 1, 1), 
-		STEEL (3, 1, 1),
-		MITHRIL(4, 1, 1);
+	public class Material {
+
+		private int damage, durability, resistance;
 		
-		private int damage;
-		private int durability;
-		private int resistance;
-		
-		
-		material(int damage, int durability, int resistance){
-			this.setDamage(damage);
-			this.setDurability(durability);
-			this.setResistance(resistance);
+		public Material(int dmg, int dur, int res) {
+			damage = dmg;
+			durability = dur;
+			resistance = res;
+		}
+
+		public static Material newWood() {
+			return new Material(1, 1, 1);
+		}	
+
+		public static Material newStone() {
+			return new Material(2, 1, 1);
+		}
+
+		public static Material newSteel() {
+			return new Material(3, 1, 1);
+		}
+
+		public static Material newMithril() {
+			return new Material(4, 1, 1);
 		}
 
 		public int getDamage() {

@@ -20,13 +20,17 @@ public class Item{
 	//Item properties
 	int itemID;
 	int range;
-	double durability;
+	int damage, durability, resistance;
 	
 	int equipArea;
 	
 	
-	public Item(int itemID, Enum<material> material, int range, boolean consumable, boolean se){
+	public Item(int itemID, Material material, int range, boolean consumable, boolean se){
 		
+
+		this.damage = material.getDamage();
+		this.durability = material.getDurability();
+		this.resistance = material.getResistance();
 		
 		if (itemID == 1) { // Checking the ItemID
 			this.range = range;
