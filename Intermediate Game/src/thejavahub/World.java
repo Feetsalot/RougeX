@@ -114,7 +114,7 @@ boolean[][] smallRoomSolid= {{true, true, true},
 				  {DB, DB, DB, DB, DB},
 				  {SB, SB, SB, SB, SB}};
 				  
-	boolean[][] smallRoomSolid= {{true, true, true, true, true},
+	boolean[][] longRoomSolid= {{true, true, true, true, true},
 		        	     {false, false, false, false , false},
 			     	     {false, false, false, false , false},
 			     	     {true, true, true, true, true}};
