@@ -100,13 +100,24 @@ public class World {
     	
     	//Diffrent size test room
     	Image[][] smallRoomImgs =  {{SB, SB, SB},
-    								{SB, BW, SB},
-    								{SB, SB, SB}};
+    				    {SB, BW, SB},
+    				    {SB, SB, SB}};
     	
 
 boolean[][] smallRoomSolid= {{true, true, true},
-							 {true, true, true},
-							 {true, true, true}};
+		             {true, true, true},
+			     {true, true, true}};
+							 
+	//Long Room
+	Image[][] longRoomImgs = {{SB, SB, SB, SB, SB},
+				  {DB, DB, DB, DB, DB},
+				  {DB, DB, DB, DB, DB},
+				  {SB, SB, SB, SB, SB}};
+				  
+	boolean[][] smallRoomSolid= {{true, true, true, true, true},
+		        	     {false, false, false, false , false},
+			     	     {false, false, false, false , false},
+			     	     {true, true, true, true, true}};
     	
     	// Room generator 
 
@@ -116,6 +127,9 @@ boolean[][] smallRoomSolid= {{true, true, true},
 
 		int smallroomSizeY = smallRoomImgs.length;
 		int smallroomSizeX = smallRoomImgs[0].length;
+		
+		int longroomSizeY = longRoomImgs.length;
+		int longroomSizeX = longRoomImgs[0].length;
 
         for(int y = 0; y < yTiles/roomSizeY; y++){
           for(int x = 0; x < xTiles/roomSizeX; x++){
@@ -169,6 +183,27 @@ if(randval < 0.05){
   	  }
             }
         }
+        
+        //Long Room Generator
+        for(int y = 0; y < yTiles/longroomSizeY; y++){
+            for(int x = 0; x < xTiles/longroomSizeX; x++){
+          	  
+          	  int longrefTileX = x * longroomSizeX;
+          	  int longrefTileY = y * longroomSizeY;
+        	  
+        	  double randval = Math.random();
+	if(randval < 0.05){
+      	  
+      	  for (int tileX = 0; tileX < longroomSizeX; tileX++) {
+      		  for (int tileY = 0; tileY < longroomSizeY; tileY++) {
+      			  blockImg[longrefTileX + tileX][longrefTileY + tileY] = longRoomImgs[tileY][tileX];
+      			  isSolid[longrefTileX + tileX][longrefTileY + tileY] = longRoomSolid[tileY][tileX];
+      		  }
+      		}
+  	      }
+            }
+        }
+        
         for(int y = 0; y < yTiles; y++){
         	for(int x = 0; x < xTiles; x++){
         	if(y == yTiles - 1 || x == xTiles - 1 || y == 0 || x == 0){
